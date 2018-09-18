@@ -122,6 +122,7 @@ func (o *OmahaHandler) checkUpdate(appResp *AppResponse, httpReq *http.Request, 
 }
 
 func fillUpdate(u *UpdateResponse, update *Update, httpReq *http.Request) {
-	u.URLs = update.URLs([]string{"http://" + httpReq.Host})
+	// don't automatically prefix with request hostname
+	u.URLs = []*URL{&update.URL}
 	u.Manifest = &update.Manifest
 }
